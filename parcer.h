@@ -24,9 +24,9 @@ typedef struct data {
 	polygon_t *polygons; // выдеется память по f
 } struct_data;
 
-int counter_f_v(struct_data* data, char* filename);
+int parcer_main(struct_data* data, FILE * file);
+int counter_f_v (struct_data* data, FILE * file);
 int start_parcer(struct_data* data, char* filename);
-int parcer_main(struct_data* data, char* filename);
 int count_num_in_poly(char *str);
 
 

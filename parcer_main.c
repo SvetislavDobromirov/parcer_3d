@@ -1,5 +1,5 @@
 #include "parcer.h"
-
+#include "struct_action.h"
 int main() {
     struct_data data_file = {}; 
     char* filename = "./cube.obj";
