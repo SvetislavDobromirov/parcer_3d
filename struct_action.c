@@ -47,9 +47,11 @@ int clean_data_struct(struct_data *data) {
     for (unsigned long i = 0; i < data->matrix_3d.rows; i++)
         free(data->matrix_3d.matrix[i]);
     free(data->matrix_3d.matrix);
-    for (unsigned long i = 0; i < data->count_of_f; i++) {
+    for (unsigned long i = 0; i < data->count_of_f; i++)
            free(data->polygons[i].vertexes);
-        //free(data->polygons);
-    }
+    free((data->polygons));
     return ret;
 }
+
+
+////asdas///

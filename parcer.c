@@ -42,7 +42,7 @@ int counter_f_v (struct_data* data, char* filename) {
 
     fseek(file, 0, 0);
 
-  data->polygons  = (polygon_t*) malloc(sizeof(polygon_t) * data->count_of_f);  // Выделение памяти под массив полигонов
+  data->polygons  = (polygon_t*) malloc(sizeof(polygon_t) * (int) data->count_of_f);  // Выделение памяти под массив полигонов
   unsigned long poly_counter = 0;
   while (1) {
         if (fgets(str, 128, file) != NULL) {
