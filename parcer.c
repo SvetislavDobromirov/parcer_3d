@@ -7,25 +7,29 @@
 
 int start_parcer(struct_data* data, char* filename) {
     int ret = 0;
-    ret = counter_f_v (data, filename);
+    FILE* file;
+    file = fopen(filename, "r");
+    ret = counter_f_v (data, file);
     if (ret != 0) return ret;
-
     printf("f = %ld\n", data->count_of_f);
-
     //data->matrix_3d.matrix = (double*) malloc(sizeof(double) * (int)data->count_of_f);
     if (init_matrix_data(data) !=0) return 2;  // Выдение памяти под матрицы
     // Память на массивы выделяем по ходу парсинга
-    parcer_main(data, filename);
+    parcer_main(data, file);
+
+    fclose(file);
+
+
     show_data_stuct(*data);
 
     //
-    clean_data_struct(data);
+  
+
+    
     return ret;
 }
 
-int counter_f_v (struct_data* data, char* filename) {
-    FILE* file;
-    file = fopen(filename, "r");
+int counter_f_v (struct_data* data, FILE * file) {
     if (file == NULL) return 2;
     char str[129] = {0};
     while (1) {
@@ -42,9 +46,9 @@ int counter_f_v (struct_data* data, char* filename) {
 
     fseek(file, 0, 0);
 
-  data->polygons  = (polygon_t*) malloc(sizeof(polygon_t) * (int) data->count_of_f);  // Выделение памяти под массив полигонов
-  unsigned long poly_counter = 0;
-  while (1) {
+    data->polygons  = (polygon_t*) malloc(sizeof(polygon_t) * (int) data->count_of_f);  // Выделение памяти под массив полигонов
+    unsigned long poly_counter = 0;
+    while (1) {
         if (fgets(str, 128, file) != NULL) {
             if (str[0] == 'f') {
                 int numbers_of_vertexes_in_facets = count_num_in_poly(str);
@@ -56,15 +60,14 @@ int counter_f_v (struct_data* data, char* filename) {
             break;
         }
     }
-    fclose(file);
+    fseek(file, 0, 0);
+
     return 0;
 }
 
-int parcer_main(struct_data* data, char* filename) {
+int parcer_main(struct_data* data, FILE * file) {
     int ret = 0;
-    
-    FILE* file;
-    file = fopen(filename, "r");
+ 
     if (file == NULL) return 2;
     char str[256] = {0};
     int counter_v = 0;
@@ -129,7 +132,8 @@ int parcer_main(struct_data* data, char* filename) {
             break;
         }
     }
-    fclose(file);
+    fseek(file, 0, 0);
+    
     return ret;
 }
 
