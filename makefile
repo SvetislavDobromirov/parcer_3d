@@ -10,3 +10,8 @@ clear:
 
 run:
 	./run
+
+push:
+	git add --all
+	git commit -ms
+	git push --all

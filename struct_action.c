@@ -48,9 +48,8 @@ int clean_data_struct(struct_data *data) {
         free(data->matrix_3d.matrix[i]);
     free(data->matrix_3d.matrix);
     for (unsigned long i = 0; i < data->count_of_f; i++) {
-        for (int k = 0; k < data->polygons[i].numbers_of_vertexes_in_facets; k++)
            free(data->polygons[i].vertexes);
-        free(data->polygons);
+        //free(data->polygons);
     }
     return ret;
 }
