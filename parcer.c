@@ -56,6 +56,7 @@ int counter_f_v (struct_data* data, char* filename) {
             break;
         }
     }
+    fclose(file);
     return 0;
 }
 
@@ -128,7 +129,7 @@ int parcer_main(struct_data* data, char* filename) {
             break;
         }
     }
-    
+    fclose(file);
     return ret;
 }
 
